@@ -5,10 +5,10 @@ from Force import Force
 class ForceCalculator:
     def compute_force(self, position_1, position_2):
         distance = DistanceCalculator.compute_distance(position_1, position_2)
-        x_multiplicative_factor = 0.5 * distance * (position_1.x - position_2.x)
-        y_multiplicative_factor = 0.5 * distance * (position_1.y - position_2.y)
+        x_multiplicative_factor = (position_1.x - position_2.x) / distance
+        y_multiplicative_factor = (position_1.y - position_2.y) / distance
 
-        common_factor = -48 * (distance ** (-13)) + 24 * (distance ** (-7))
+        common_factor = 48 * (distance ** (-13)) - 24 * (distance ** (-7))
 
         x_force = common_factor * x_multiplicative_factor
         y_force = common_factor * y_multiplicative_factor

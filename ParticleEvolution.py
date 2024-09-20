@@ -14,20 +14,23 @@ class ParticleEvolution:
     def compute_sum_force(self, particles, index):
 
         force_calculator = ForceCalculator()
-        force_result = Force(0, 0)
+        force_result_x = 0
+        force_result_y = 0
 
         for i in range(len(particles)):
             if i != index:
-                force_result += force_calculator.compute_force(particles[index].position, particles[i].position)
+                force_i = force_calculator.compute_force(particles[index].position, particles[i].position)
+                force_result_x += force_i.x
+                force_result_y += force_i.y
 
-        return force_result
+        return Force(force_result_x, force_result_y)
 
     def compute_sum_potential_energy(self, particles, index):
         force_calculator = ForceCalculator()
         energy = 0
 
         for i in range(len(particles)):
-            if i != index:
+            if i > index:
                 energy += force_calculator.compute_energy_pot(particles[index].position, particles[i].position)
 
         return energy
