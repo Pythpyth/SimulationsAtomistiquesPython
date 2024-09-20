@@ -5,8 +5,8 @@ class PositionEvolution:
     def __init__(self, delta_t):
         self.delta_t = delta_t
 
-    def evolve_1_dimension(self, position_i, impulsion_i):
-        return position_i + impulsion_i * self.delta_t
+    def evolve_1_dimension(self, position_i, v_i):
+        return position_i + v_i * self.delta_t
 
     def evolve(self, position_i, impulsion_i):
         position_i_plus_1_x = self.evolve_1_dimension(position_i.x, impulsion_i.vx)
