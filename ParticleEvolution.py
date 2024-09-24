@@ -1,3 +1,4 @@
+from DistanceCalculator import DistanceCalculator
 from Force import Force
 from ForceCalculator import ForceCalculator
 from ImpulsionEvolution import ImpulsionEvolution
@@ -6,14 +7,16 @@ from PositionEvolution import PositionEvolution
 
 
 class ParticleEvolution:
-    def __init__(self, delta_t):
+    def __init__(self, delta_t, box_size, r_trunc):
         self.delta_t = delta_t
-        self.position_evolution = PositionEvolution(self.delta_t)
+        self.box_size = box_size
+        self.r_trunc = r_trunc
+        self.position_evolution = PositionEvolution(self.delta_t, box_size)
         self.impulsion_evolution = ImpulsionEvolution(self.delta_t)
 
     def compute_sum_force(self, particles, index):
 
-        force_calculator = ForceCalculator()
+        force_calculator = ForceCalculator(self.r_trunc, self.box_size)
         force_result_x = 0
         force_result_y = 0
 
@@ -26,7 +29,7 @@ class ParticleEvolution:
         return Force(force_result_x, force_result_y)
 
     def compute_sum_potential_energy(self, particles, index):
-        force_calculator = ForceCalculator()
+        force_calculator = ForceCalculator(self.r_trunc, self.box_size)
         energy = 0
 
         for i in range(len(particles)):
