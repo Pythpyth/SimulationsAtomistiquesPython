@@ -11,10 +11,11 @@ from Simulation import Simulation
 class MyTestCase(unittest.TestCase):
 
     def test_something(self):
-        time_step_numbers = [1000, 5000, 10000, 50000, 100000]
+        time_step_numbers = [1000, 5000, 10000, 50000, 100000, 200000]
+        #time_step_numbers = [800000]
         ln_time_step = np.zeros(len(time_step_numbers))
         ln_delta_energy = np.zeros(len(time_step_numbers))
-        time_end = 0.5
+        time_end = 10
         simulation = Simulation
         for i in range(0, len(time_step_numbers)):
             time_step = time_end / time_step_numbers[i]
